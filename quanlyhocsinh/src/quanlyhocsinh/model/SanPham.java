@@ -2,65 +2,63 @@ package quanlyhocsinh.model;
 
 public class SanPham {
 	private int maSanPham;
-	private String tenSanPham;
-	private int soLuong;
-	private double giaCa;
-	private HoaDon hoaDon;
-	
-	public SanPham(int maSanPham, String tenSanPham, int soLuong, double giaCa, HoaDon hoaDon) {
-		super();
-		this.maSanPham = maSanPham;
-		this.tenSanPham = tenSanPham;
-		this.soLuong = soLuong;
-		this.giaCa = giaCa;
-		this.hoaDon = hoaDon;
-	}
+    private String tenSanPham;
+    private int soLuong;
+    private double giaCa;
+    private HoaDon hoaDon;
 
-	public int getMaSanPham() {
-		return maSanPham;
-	}
+    public SanPham() {}
 
-	public void setMaSanPham(int maSanPham) {
-		this.maSanPham = maSanPham;
-	}
+    public SanPham(int maSanPham, String tenSanPham, int soLuong, double giaCa) {
+        this.maSanPham = maSanPham;
+        this.tenSanPham = tenSanPham;
+        this.soLuong = soLuong;
+        this.giaCa = giaCa;
+    }
 
-	public String getTenSanPham() {
-		return tenSanPham;
-	}
+    public int getMaSanPham() {
+        return maSanPham;
+    }
 
-	public void setTenSanPham(String tenSanPham) {
-		this.tenSanPham = tenSanPham;
-	}
+    public void setMaSanPham(int maSanPham) {
+        this.maSanPham = maSanPham;
+    }
 
-	public int getSoLuong() {
-		return soLuong;
-	}
+    public String getTenSanPham() {
+        return tenSanPham;
+    }
 
-	public void setSoLuong(int soLuong) {
-		this.soLuong = soLuong;
-	}
+    public void setTenSanPham(String tenSanPham) {
+        this.tenSanPham = tenSanPham;
+    }
 
-	public double getGiaCa() {
-		return giaCa;
-	}
+    public int getSoLuong() {
+        return soLuong;
+    }
 
-	public void setGiaCa(double giaCa) {
-		this.giaCa = giaCa;
-	}
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
 
-	public HoaDon getHoaDon() {
-		return hoaDon;
-	}
+    public double getGiaCa() {
+        return giaCa;
+    }
 
-	public void setHoaDon(HoaDon hoaDon) {
-		this.hoaDon = hoaDon;
-	}
+    public void setGiaCa(double giaCa) {
+        this.giaCa = giaCa;
+    }
 
-	@Override
-	public String toString() {
-		return "SanPham [maSanPham=" + maSanPham + ", tenSanPham=" + tenSanPham + ", soLuong=" + soLuong + ", giaCa="
-				+ giaCa + ", hoaDon=" + hoaDon + "]";
-	}
-	
+    public HoaDon getHoaDon() {
+        return hoaDon;
+    }
+
+    public void setHoaDon(HoaDon hoaDon) {
+        this.hoaDon = hoaDon;
+    }
+
+    @Override
+    public String toString() {
+        return "SanPham{" + "maSanPham=" + maSanPham + ", tenSanPham='" + tenSanPham + '\'' + ", soLuong=" + soLuong + ", giaCa=" + giaCa + '}';
+    }
 	
 }
