@@ -37,7 +37,7 @@ public class SinhVien implements Cloneable {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+	public Object clone() throws CloneNotSupportedException {
         SinhVien cloned = (SinhVien) super.clone();
         cloned.lop = (LopHoc) lop.clone(); // deep clone LopHoc
         return cloned;
