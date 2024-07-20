@@ -1,10 +1,11 @@
 package quanlyhocsinh.model;
 
-public class LapTop extends SanPham{
-	private int ram;
+public class LapTop extends SanPham {
+    private int ram;
     private String cpu;
 
-    public LapTop(int ram, String cpu) {
+    public LapTop(int maSanPham, String tenSanPham, int soLuong, double giaCa, int ram, String cpu) {
+        super(maSanPham, tenSanPham, soLuong, giaCa);
         this.ram = ram;
         this.cpu = cpu;
     }
@@ -27,8 +28,13 @@ public class LapTop extends SanPham{
 
     @Override
     public String toString() {
-        return "LapTop{" + "ram=" + ram + ", cpu='" + cpu + '\'' + '}';
+        return "LapTop{" +
+                "maSanPham=" + getMaSanPham() +
+                ", tenSanPham='" + getTenSanPham() + '\'' +
+                ", soLuong=" + getSoLuong() +
+                ", giaCa=" + getGiaCa() +
+                ", ram=" + ram +
+                ", cpu='" + cpu + '\'' +
+                '}';
     }
-	
-	
 }

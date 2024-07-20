@@ -1,13 +1,10 @@
 package quanlyhocsinh.model;
 
-public class SanPham {
-	private int maSanPham;
+public class SanPham implements Cloneable {
+    private int maSanPham;
     private String tenSanPham;
     private int soLuong;
     private double giaCa;
-    private HoaDon hoaDon;
-
-    public SanPham() {}
 
     public SanPham(int maSanPham, String tenSanPham, int soLuong, double giaCa) {
         this.maSanPham = maSanPham;
@@ -20,45 +17,25 @@ public class SanPham {
         return maSanPham;
     }
 
-    public void setMaSanPham(int maSanPham) {
-        this.maSanPham = maSanPham;
-    }
-
     public String getTenSanPham() {
         return tenSanPham;
-    }
-
-    public void setTenSanPham(String tenSanPham) {
-        this.tenSanPham = tenSanPham;
     }
 
     public int getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
-    }
-
     public double getGiaCa() {
         return giaCa;
     }
 
-    public void setGiaCa(double giaCa) {
-        this.giaCa = giaCa;
-    }
-
-    public HoaDon getHoaDon() {
-        return hoaDon;
-    }
-
-    public void setHoaDon(HoaDon hoaDon) {
-        this.hoaDon = hoaDon;
+    @Override
+    public String toString() {
+        return "SanPham [maSanPham=" + maSanPham + ", tenSanPham=" + tenSanPham + ", soLuong=" + soLuong + ", giaCa=" + giaCa + "]";
     }
 
     @Override
-    public String toString() {
-        return "SanPham{" + "maSanPham=" + maSanPham + ", tenSanPham='" + tenSanPham + '\'' + ", soLuong=" + soLuong + ", giaCa=" + giaCa + '}';
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
-	
 }

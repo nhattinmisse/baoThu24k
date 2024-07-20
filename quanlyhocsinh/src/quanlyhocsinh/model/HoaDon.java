@@ -2,7 +2,7 @@ package quanlyhocsinh.model;
 
 import java.util.List;
 
-public class HoaDon {
+public class HoaDon implements Cloneable{
 	private int soHoaDon;
     private List<SanPham> dssp;
 
@@ -24,6 +24,11 @@ public class HoaDon {
 
     public void setDssp(List<SanPham> dssp) {
         this.dssp = dssp;
+    }
+    
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     @Override

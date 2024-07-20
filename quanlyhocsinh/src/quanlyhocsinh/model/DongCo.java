@@ -1,6 +1,6 @@
 package quanlyhocsinh.model;
 
-public class DongCo {
+public class DongCo implements Cloneable{
 	private String loaiDongCo;
     private double congSuat;
 
@@ -23,6 +23,16 @@ public class DongCo {
 
     public void setCongSuat(double congSuat) {
         this.congSuat = congSuat;
+    }
+    
+    public DongCo(double congSuat) {
+        this.congSuat = congSuat;
+    }
+
+    
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     @Override

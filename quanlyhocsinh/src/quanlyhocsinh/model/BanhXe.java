@@ -1,6 +1,6 @@
 package quanlyhocsinh.model;
 
-public class BanhXe {
+public class BanhXe implements Cloneable{
 	private String loaiBanhXe;
     private double banKinh;
 
@@ -17,12 +17,19 @@ public class BanhXe {
         this.loaiBanhXe = loaiBanhXe;
     }
 
+    public BanhXe(double banKinh) {
+        this.banKinh = banKinh;
+    }
+
     public double getBanKinh() {
         return banKinh;
     }
-
-    public void setBanKinh(double banKinh) {
-        this.banKinh = banKinh;
+    
+    
+    
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     @Override

@@ -47,4 +47,9 @@ public class SinhVien implements Cloneable {
     public String toString() {
         return "SinhVien{" + "hoTen='" + hoTen + '\'' + ", lop=" + lop + '}';
     }
+
+	public void addHoaDon(HoaDon hoaDon) {
+		// TODO Auto-generated method stub
+		
+	}
 }
