@@ -8,7 +8,7 @@ public class DBConnection {
 	private static DBConnection instance;
 	//Doi tuong ket noi toi MySQL
 	private Connection conn;
-	private String ipadd = "172.16.2.16";
+	private String ipadd = "172.16.1.159";
 	private String port = "3306";
 	private String database = "qlsv";
 	private String username = "root";
