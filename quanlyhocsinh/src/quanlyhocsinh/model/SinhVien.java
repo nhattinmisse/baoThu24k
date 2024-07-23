@@ -5,11 +5,13 @@ import java.util.List;
 public class SinhVien implements Cloneable {
 	private String hoTen;
     private LopHoc lop;
+    private int maSinhVien;
     private List<HoaDon> dshd;
 
-    public SinhVien(String hoTen, LopHoc lop) {
+    public SinhVien(String hoTen, LopHoc lop, int maSinhVien) {
         this.hoTen = hoTen;
         this.lop = lop;
+        this.maSinhVien = maSinhVien;
     }
 
     public String getHoTen() {
@@ -27,6 +29,11 @@ public class SinhVien implements Cloneable {
     public void setLop(LopHoc lop) {
         this.lop = lop;
     }
+    
+    public int getMaSinhVien() {
+        return maSinhVien;
+    }
+
 
     public List<HoaDon> getDshd() {
         return dshd;
@@ -42,10 +49,15 @@ public class SinhVien implements Cloneable {
         cloned.lop = (LopHoc) lop.clone(); // deep clone LopHoc
         return cloned;
     }
+    
 
     @Override
     public String toString() {
-        return "SinhVien{" + "hoTen='" + hoTen + '\'' + ", lop=" + lop + '}';
+        return "SinhVien{" + 
+        			"hoTen='" + hoTen + '\'' + 
+        			", lop=" + lop + 
+        			", maSinhVien=" + maSinhVien +
+        		'}';
     }
 
 	public void addHoaDon(HoaDon hoaDon) {

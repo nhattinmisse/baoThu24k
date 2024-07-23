@@ -10,28 +10,28 @@ import quanlyhocsinh.model.SinhVien;
 import quanlyhocsinh.model.XeHoi;
 
 class SinhVienPredicate implements Predicate<SinhVien> {
-    private String tenSinhVien;
+    private String keyword;
 
-    public SinhVienPredicate(String tenSinhVien) {
-        this.tenSinhVien = tenSinhVien;
+    public SinhVienPredicate(String keyword) {
+        this.keyword = keyword;
     }
 
     @Override
-    public boolean test(SinhVien sinhVien) {
-        return sinhVien.getHoTen().equalsIgnoreCase(tenSinhVien);
+    public boolean test(SinhVien sv) {
+        return sv.getHoTen().equalsIgnoreCase(keyword);
     }
 }
 
 class SanPhamPredicate implements Predicate<SanPham> {
-    private String tenSanPham;
+    private int maSanPham;
 
-    public SanPhamPredicate(String tenSanPham) {
-        this.tenSanPham = tenSanPham;
+    public SanPhamPredicate(int maSanPham) {
+        this.maSanPham = maSanPham;
     }
 
     @Override
-    public boolean test(SanPham sanPham) {
-        return sanPham.getTenSanPham().equalsIgnoreCase(tenSanPham);
+    public boolean test(SanPham sp) {
+        return sp.getMaSanPham() == maSanPham;
     }
 }
 
@@ -43,46 +43,46 @@ class HoaDonPredicate implements Predicate<HoaDon> {
     }
 
     @Override
-    public boolean test(HoaDon hoaDon) {
-        return hoaDon.getSoHoaDon() == soHoaDon;
+    public boolean test(HoaDon hd) {
+        return hd.getSoHoaDon() == soHoaDon;
     }
 }
 
 class BanhXePredicate implements Predicate<BanhXe> {
-    private String loaiBanhXe;
+    private double banKinh;
 
-    public BanhXePredicate(String loaiBanhXe) {
-        this.loaiBanhXe = loaiBanhXe;
+    public BanhXePredicate(double banKinh) {
+        this.banKinh = banKinh;
     }
 
     @Override
-    public boolean test(BanhXe banhXe) {
-        return banhXe.getLoaiBanhXe().equalsIgnoreCase(loaiBanhXe);
+    public boolean test(BanhXe bx) {
+        return bx.getBanKinh() == banKinh;
     }
 }
 
 class DongCoPredicate implements Predicate<DongCo> {
-    private String loaiDongCo;
+    private double congSuat;
 
-    public DongCoPredicate(String loaiDongCo) {
-        this.loaiDongCo = loaiDongCo;
+    public DongCoPredicate(double congSuat) {
+        this.congSuat = congSuat;
     }
 
     @Override
-    public boolean test(DongCo dongCo) {
-        return dongCo.getLoaiDongCo().equalsIgnoreCase(loaiDongCo);
+    public boolean test(DongCo dc) {
+        return dc.getCongSuat() == congSuat;
     }
 }
 
 class XeHoiPredicate implements Predicate<XeHoi> {
-    private String tenXe;
+    private int id;
 
-    public XeHoiPredicate(String tenXe) {
-        this.tenXe = tenXe.toLowerCase(); // Chuyển thành chữ thường để không phân biệt hoa thường
+    public XeHoiPredicate(int id) {
+        this.id = id;
     }
 
     @Override
-    public boolean test(XeHoi xeHoi) {
-        return xeHoi.getTenXe().toLowerCase().contains(tenXe);
+    public boolean test(XeHoi xh) {
+        return xh.getId() == id;
     }
 }

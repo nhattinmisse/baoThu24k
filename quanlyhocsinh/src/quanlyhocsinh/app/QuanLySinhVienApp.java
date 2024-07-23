@@ -46,12 +46,15 @@ public class QuanLySinhVienApp {
                     timKiemDuLieu(scanner);
                     break;
                 case 4:
+                	xoaDuLieu(scanner);
+                	break;
+                case 5:
                     xuatTatCaThongTin();
                     break;
-                case 5:
+                case 6:
                     suDungDeepCloning();
                     break;
-                case 6:
+                case 7:
                     System.out.println("Thoát chương trình.");
                     scanner.close();
                     return;
@@ -67,9 +70,10 @@ public class QuanLySinhVienApp {
         System.out.println("==    1. Nhập dữ liệu                         ==");
         System.out.println("==    2. Sắp xếp dữ liệu                      ==");
         System.out.println("==    3. Tìm kiếm dữ liệu                     ==");
-        System.out.println("==    4. Xuất tất cả thông tin                ==");
-        System.out.println("==    5. Sử dụng kỹ thuật Deep Cloning        ==");
-        System.out.println("==    6. Thoát                                ==");
+        System.out.println("==    4. Xóa dữ liệu                          ==");
+        System.out.println("==    5. Xuất tất cả thông tin                ==");
+        System.out.println("==    6. Sử dụng kỹ thuật Deep Cloning        ==");
+        System.out.println("==    7. Thoát                                ==");
         System.out.println("===============================================");
         System.out.print("Chọn chức năng: ");
     }
@@ -122,7 +126,7 @@ public class QuanLySinhVienApp {
             System.out.print("==   Nhập tên lớp: ");
             String tenLop = scanner.nextLine();
             LopHoc lopHoc = new LopHoc(tenLop);
-            SinhVien sinhVien = new SinhVien(hoTen, lopHoc);
+            SinhVien sinhVien = new SinhVien(hoTen, lopHoc, i);
             sinhVienList.add(sinhVien);
         }
 
@@ -256,7 +260,7 @@ public class QuanLySinhVienApp {
                 }
             }
 
-            XeHoi xeHoi = new XeHoi(maXe, tenXe, namSanXuat, giaXe, dongCo, dsbx);
+            XeHoi xeHoi = new XeHoi(maXe, tenXe, namSanXuat, giaXe, dongCo, dsbx, namSanXuat, tenXe, namSanXuat, giaXe);
             xeHoiList.add(xeHoi);
             System.out.println("Đã thêm xe hơi: " + xeHoi);
         }
@@ -267,6 +271,61 @@ public class QuanLySinhVienApp {
         }
         System.out.println("==----------------------------------------------------==");
     }
+    
+    private static void xoaDuLieu(Scanner scanner) {
+        System.out.println("==    Chọn loại dữ liệu cần xóa:                ==");
+        System.out.println("==    1. Xóa sinh viên theo tên                 ==");
+        System.out.println("==    2. Xóa sản phẩm theo mã sản phẩm          ==");
+        System.out.println("==    3. Xóa hóa đơn theo số hóa đơn            ==");
+        System.out.println("==    4. Xóa bánh xe theo loại                  ==");
+        System.out.println("==    5. Xóa động cơ theo loại                  ==");
+        System.out.println("==    6. Xóa xe hơi theo mã xe                  ==");
+        System.out.print("Chọn loại dữ liệu: ");
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Đọc ký tự newline
+
+        switch (choice) {
+            case 1:
+                System.out.print("==    Nhập tên sinh viên cần xóa: ");
+                String tenSV = scanner.nextLine();
+                sinhVienList.removeIf(sv -> sv.getHoTen().equalsIgnoreCase(tenSV));
+                break;
+            case 2:
+                System.out.print("==    Nhập mã sản phẩm cần xóa: ");
+                int maSP = scanner.nextInt();
+                scanner.nextLine(); // Đọc ký tự newline
+                sanPhamList.removeIf(sp -> sp.getMaSanPham() == maSP);
+                break;
+            case 3:
+                System.out.print("==    Nhập số hóa đơn cần xóa: ");
+                int soHD = scanner.nextInt();
+                scanner.nextLine(); // Đọc ký tự newline
+                hoaDonList.removeIf(hd -> hd.getSoHoaDon() == soHD);
+                break;
+            case 4:
+                System.out.print("==    Nhập loại bánh xe cần xóa: ");
+                String loaiBX = scanner.nextLine();
+                banhXeList.removeIf(bx -> bx.getLoaiBanhXe().equalsIgnoreCase(loaiBX));
+                break;
+            case 5:
+                System.out.print("==    Nhập loại động cơ cần xóa: ");
+                String loaiDC = scanner.nextLine();
+                dongCoList.removeIf(dc -> dc.getLoaiDongCo().equalsIgnoreCase(loaiDC));
+                break;
+            case 6:
+                System.out.print("==    Nhập mã xe cần xóa: ");
+                int maXe = scanner.nextInt();
+                scanner.nextLine(); // Đọc ký tự newline
+                xeHoiList.removeIf(xh -> xh.getId() == maXe);
+                break;
+            default:
+                System.out.println("Lựa chọn không hợp lệ!");
+        }
+
+        System.out.println("==   Dữ liệu sau khi xóa: ");
+        xuatTatCaThongTin();
+    
+}
 
     private static void sapXepDuLieu(Scanner scanner) {
         System.out.println("==    Chọn loại dữ liệu cần sắp xếp:                 ==");
@@ -281,13 +340,18 @@ public class QuanLySinhVienApp {
         scanner.nextLine(); // Đọc ký tự newline
 
         switch (choice) {
-            case 1:
+        case 1:
+        	if (sinhVienList.size() < 3) {
+                System.out.println("Danh sách sinh viên phải có ít nhất 3 sinh viên để sắp xếp.");
+            } else {
                 Collections.sort(sinhVienList, new SinhVienComparator());
                 System.out.println("==   Danh sách sinh viên sau khi sắp xếp:            ==");
                 for (SinhVien sv : sinhVienList) {
                     System.out.println(sv);
                 }
-                break;
+            }
+            break;
+        		
             case 2:
                 Collections.sort(sanPhamList, new SanPhamComparator());
                 System.out.println("==   Danh sách sản phẩm sau khi sắp xếp:             ==");
@@ -317,95 +381,75 @@ public class QuanLySinhVienApp {
                 }
                 break;
             case 6:
-                Collections.sort(xeHoiList, new XeHoiComparator());
-                System.out.println("==   Danh sách xe hơi sau khi sắp xếp:               ==");
-                for (XeHoi xh : xeHoiList) {
-                    System.out.println(xh);
+            	if (xeHoiList.size() < 3) {
+                    System.out.println("Danh sách xe hơi phải có ít nhất 3 xe để sắp xếp.");
+                } else {
+                    Collections.sort(xeHoiList, new XeHoiComparator());
+                    System.out.println("==   Danh sách xe hơi sau khi sắp xếp:               ==");
+                    for (XeHoi xh : xeHoiList) {
+                        System.out.println(xh);
+                    }
                 }
+                    
                 break;
             default:
                 System.out.println("Lựa chọn không hợp lệ!");
+               
         }
     }
     private static void timKiemDuLieu(Scanner scanner) {
-        System.out.println("==    Chọn loại dữ liệu cần tìm kiếm:                ==");
-        System.out.println("==    1. Tìm kiếm sinh viên theo tên                 ==");
-        System.out.println("==    2. Tìm kiếm sản phẩm theo tên                  ==");
-        System.out.println("==    3. Tìm kiếm hóa đơn theo số hóa đơn            ==");
-        System.out.println("==    4. Tìm kiếm bánh xe theo loại                  ==");
-        System.out.println("==    5. Tìm kiếm động cơ theo loại                  ==");
-        System.out.println("==    6. Tìm kiếm xe hơi theo tên                    ==");
+        System.out.println("==    Chọn loại dữ liệu cần tìm kiếm:               ==");
+        System.out.println("==    1. Tìm kiếm sinh viên theo tên                ==");
+        System.out.println("==    2. Tìm kiếm sản phẩm theo mã sản phẩm         ==");
+        System.out.println("==    3. Tìm kiếm hóa đơn theo số hóa đơn           ==");
+        System.out.println("==    4. Tìm kiếm bánh xe theo bán kính             ==");
+        System.out.println("==    5. Tìm kiếm động cơ theo công suất            ==");
+        System.out.println("==    6. Tìm kiếm xe hơi theo mã xe                 ==");
         System.out.print("Chọn loại dữ liệu: ");
         int choice = scanner.nextInt();
         scanner.nextLine(); // Đọc ký tự newline
 
         switch (choice) {
             case 1:
-                System.out.print("==    Nhập tên sinh viên cần tìm: ");
-                String tenSV = scanner.nextLine();
-                Predicate<SinhVien> svPredicate = new SinhVienPredicate(tenSV);
-                List<SinhVien> ketQuaSV = sinhVienList.stream().filter(svPredicate).collect(Collectors.toList());
-                System.out.println("==    Kết quả tìm kiếm sinh viên:                    ==");
-                for (SinhVien sv : ketQuaSV) {
-                    System.out.println(sv);
-                }
+                System.out.print("Nhập tên sinh viên: ");
+                String tenSinhVien = scanner.nextLine();
+                sinhVienList.stream().filter(new SinhVienPredicate(tenSinhVien)).forEach(System.out::println);
                 break;
             case 2:
-                System.out.print("==    Nhập tên sản phẩm cần tìm: ");
-                String tenSP = scanner.nextLine();
-                Predicate<SanPham> spPredicate = new SanPhamPredicate(tenSP);
-                List<SanPham> ketQuaSP = sanPhamList.stream().filter(spPredicate).collect(Collectors.toList());
-                System.out.println("==    Kết quả tìm kiếm sản phẩm:                     ==");
-                for (SanPham sp : ketQuaSP) {
-                    System.out.println(sp);
-                }
+                System.out.print("Nhập mã sản phẩm: ");
+                int maSanPham = scanner.nextInt();
+                scanner.nextLine(); // Đọc ký tự newline
+                sanPhamList.stream().filter(new SanPhamPredicate(maSanPham)).forEach(System.out::println);
                 break;
             case 3:
-                System.out.print("==    Nhập số hóa đơn cần tìm: ");
-                int soHD = scanner.nextInt();
+                System.out.print("Nhập số hóa đơn: ");
+                int soHoaDon = scanner.nextInt();
                 scanner.nextLine(); // Đọc ký tự newline
-                Predicate<HoaDon> hdPredicate = new HoaDonPredicate(soHD);
-                List<HoaDon> ketQuaHD = hoaDonList.stream().filter(hdPredicate).collect(Collectors.toList());
-                System.out.println("==    Kết quả tìm kiếm hóa đơn:                      ==");
-                for (HoaDon hd : ketQuaHD) {
-                    System.out.println(hd);
-                }
+                hoaDonList.stream().filter(new HoaDonPredicate(soHoaDon)).forEach(System.out::println);
                 break;
             case 4:
-                System.out.print("==    Nhập loại bánh xe cần tìm: ");
-                String loaiBX = scanner.nextLine();
-                Predicate<BanhXe> bxPredicate = new BanhXePredicate(loaiBX);
-                List<BanhXe> ketQuaBX = banhXeList.stream().filter(bxPredicate).collect(Collectors.toList());
-                System.out.println("==    Kết quả tìm kiếm bánh xe:                      ==");
-                for (BanhXe bx : ketQuaBX) {
-                    System.out.println(bx);
-                }
+                System.out.print("Nhập bán kính bánh xe: ");
+                double banKinh = scanner.nextDouble();
+                scanner.nextLine(); // Đọc ký tự newline
+                banhXeList.stream().filter(new BanhXePredicate(banKinh)).forEach(System.out::println);
                 break;
             case 5:
-                System.out.print("==    Nhập loại động cơ cần tìm: ");
-                String loaiDC = scanner.nextLine();
-                Predicate<DongCo> dcPredicate = new DongCoPredicate(loaiDC);
-                List<DongCo> ketQuaDC = dongCoList.stream().filter(dcPredicate).collect(Collectors.toList());
-                System.out.println("==    Kết quả tìm kiếm động cơ:                      ==");
-                for (DongCo dc : ketQuaDC) {
-                    System.out.println(dc);
-                }
+                System.out.print("Nhập công suất động cơ: ");
+                double congSuat = scanner.nextDouble();
+                scanner.nextLine(); // Đọc ký tự newline
+                dongCoList.stream().filter(new DongCoPredicate(congSuat)).forEach(System.out::println);
                 break;
+         
             case 6:
-                System.out.print("==    Nhập tên xe hơi cần tìm: ");
-                String tenXH = scanner.nextLine();
-                Predicate<XeHoi> xhPredicate = new XeHoiPredicate(tenXH);
-                List<XeHoi> ketQuaXH = xeHoiList.stream().filter(xhPredicate).collect(Collectors.toList());
-                System.out.println("==    Kết quả tìm kiếm xe hơi:                       ==");
-                for (XeHoi xh : ketQuaXH) {
-                    System.out.println(xh);
-                }
+                System.out.print("Nhập mã xe: ");
+                int maXe = scanner.nextInt();
+                scanner.nextLine(); // Đọc ký tự newline
+                xeHoiList.stream().filter(new XeHoiPredicate(maXe)).forEach(System.out::println);
                 break;
             default:
                 System.out.println("Lựa chọn không hợp lệ!");
         }
     }
-
     private static void xuatTatCaThongTin() {
         System.out.println("==            Thông tin tất cả sinh viên đã nhập:           ==");
         for (SinhVien sv : sinhVienList) {
